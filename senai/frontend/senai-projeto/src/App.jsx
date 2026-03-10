@@ -1,14 +1,22 @@
 import { useState } from 'react';
 
 function App() {
-  const [nome, setNome] = useState('');
-  const [senha, setSenha] = useState('');
-    
+  const [nome, setNome] = useState("");
+  const [senha, setSenha] = useState("");
+  
+  const formularioEspaco = () => {
+    if (nome.trim() === "" || senha.trim() === "") {
+    alert('SEM ESPAÇOS NA SENHA');
+  } else {
+    alert("gloria");
+  }
+};
+
   return (
     <div>
       <h1>Para listar suas tarefas, preciso que faça seu cadastro:</h1>
 
-      <form>
+      <form onSubmit={formularioEspaco}>
         <label>
           nome:
           <input 
@@ -30,7 +38,7 @@ function App() {
         </label>
 
         <br />
-        {nome && senha && <button>cadastrar</button>}
+        {nome && senha && <button type="submit">cadastrar</button>}
       </form>
     </div>
   );
