@@ -1,0 +1,15 @@
+CREATE TABLE users (
+  id SERIAL PRIMARY KEY,
+  nome VARCHAR(100) NOT NULL,
+  senha VARCHAR(100) NOT NULL,
+  email VARCHAR(100) UNIQUE NOT NULL,
+  role VARCHAR(100) NOT NULL DEFAULT 'user' CHECK (role IN('admin', 'user'))
+);
+
+CREATE TABLE tasks (
+  id SERIAL PRIMARY KEY,
+  titulo VARCHAR(100) NOT NULL,
+  descricao TEXT,
+  status VARCHAR(100) NOT NULL DEFAULT 'incompleto' CHECK (status IN('incompleto', 'em_progresso', 'feito')),
+  user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE
+);

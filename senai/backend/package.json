@@ -11,11 +11,13 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "cat": "^0.2.0",
     "cors": "^2.8.6",
     "dotenv": "^17.3.1",
     "expres": "^0.0.5",
     "express": "^5.2.1",
-    "pg": "^8.20.0"
+    "pg": "^8.20.0",
+    "server.js": "^1.0.0"
   },
   "devDependencies": {
     "nodemon": "^3.1.14"
