@@ -4,14 +4,12 @@ const {
   getAll,
   getById,
   update,
-  remove,
+  create,
 } = require("../controllers/usersController");
-const verifyToken = require("../middlewares/verifyToken");
-const verifyAdmin = require("../middlewares/verifyAdmin");
 
 router.get("/", getAll);
 router.get("/:id", getById);
-//router.put("/:id", verifyToken, update);
-//router.delete("/:id", verifyToken, verifyAdmin, remove);
+router.post("/", create);
+router.put("/:id", update);
 
 module.exports = router;
