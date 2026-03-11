@@ -44,15 +44,18 @@ function App() {
               onChange={(e) => setSenha(e.target.value)}
             />
           </label>
+
+                    <h5>E também a sua senha</h5>
+
           <label>
             email:
             <input
               type="text"
-              placeholder="Digite seu email"
+              placeholder="Digita um email"
               onChange={(e) => setEmail(e.target.value)}
             />
           </label>
-          <br />
+          <br/>
           {nome && senha && email && <button type="submit">cadastrar</button>}
         </form>
       </div>
