@@ -1,4 +1,5 @@
 const pool = require("../configs/db");
+const bcrypt = require("bcrypt");
 
 async function getAll(req, res) {
   try {
@@ -48,9 +49,10 @@ async function update(req, res) {
 async function create(req, res) {
   const { nome, email, senha } = req.body;
   try {
+    const hash = await bcrypt.hash(senha, 10);
     const result = await pool.query(
       "INSERT INTO users (nome, email, senha, role) VALUES ($1, $2, $3, 'user') RETURNING id, nome, email, role",
-      [nome, email, senha],
+      [nome, email, hash],
     );
     res.status(201).json(result.rows[0]);
   } catch (error) {
