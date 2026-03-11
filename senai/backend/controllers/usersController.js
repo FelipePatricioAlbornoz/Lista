@@ -11,4 +11,19 @@ async function getAll(req, res) {
   }
 }
 
-module.exports = { getAll };
+async function getById(req, res) {
+  const { id } = req.params;
+  try {
+    const resultado = await pool.query(
+      "SELECT id, nome, email, role FROM users WHERE id = $1",
+      [id],
+    );
+    if (resultado.rows.length === 0)
+      return res.status(404).json({ error: "Usuario nao achado" });
+    res.json(resultado.rows[0]);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+}
+
+module.exports = { getAll, getById };

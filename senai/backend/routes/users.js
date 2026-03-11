@@ -9,8 +9,8 @@ const {
 const verifyToken = require("../middlewares/verifyToken");
 const verifyAdmin = require("../middlewares/verifyAdmin");
 
-router.get("/", verifyToken, verifyAdmin, getAll);
-//router.get("/:id", verifyToken, getById);
+router.get("/", getAll);
+router.get("/:id", getById);
 //router.put("/:id", verifyToken, update);
 //router.delete("/:id", verifyToken, verifyAdmin, remove);
 
