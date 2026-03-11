@@ -1,47 +1,62 @@
 import { useState } from 'react';
+import axios from 'axios';
 
 function App() {
   const [nome, setNome] = useState("");
   const [senha, setSenha] = useState("");
-  
-  const formularioEspaco = () => {
-    if (nome.trim() === "" || senha.trim() === "") {
-    alert('SEM ESPAÇOS NA SENHA');
-  } else {
-    alert("gloria");
-  }
-};
+  const [email, setEmail] = useState("");
+
+  const cadastrar = async (e) => {
+    e.preventDefault();
+    if (nome.trim() === "" || senha.trim() === "" || email.trim() === "") {
+      alert('Preencha todos os campos');
+      return;
+    }
+    try {
+      await axios.post('http://localhost:3000/users', { nome, email, senha });
+      alert('Cadastro realizado!');
+    } catch (err) {
+      alert(err.response?.data?.error || 'Erro ao cadastrar');
+    }
+  };
 
   return (
-    <div>
-      <h1>Para listar suas tarefas, preciso que faça seu cadastro:</h1>
+      <div>
+        <h1>Para listar suas tarefas, preciso que faça seu cadastro:</h1>
 
-      <form onSubmit={formularioEspaco}>
-        <label>
-          nome:
-          <input 
-            type="text" 
-            placeholder="Crie seu nome" 
-            onChange={(e) => setNome(e.target.value)} 
-          />
-        </label>
+        <form onSubmit={cadastrar}>
+          <label>
+            nome:
+            <input
+              type="text"
+              placeholder="Crie seu nome"
+              onChange={(e) => setNome(e.target.value)}
+            />
+          </label>
 
-        <h5>E também a sua senha</h5>
+          <h5>E também a sua senha</h5>
 
-        <label>
-          senha:
-          <input 
-            type="password" 
-            placeholder="Crie sua senha" 
-            onChange={(e) => setSenha(e.target.value)} 
-          />
-        </label>
+          <label>
+            senha:
+            <input
+              type="password"
+              placeholder="Crie sua senha"
+              onChange={(e) => setSenha(e.target.value)}
+            />
+          </label>
+          <label>
+            email:
+            <input
+              type="text"
+              placeholder="Digite seu email"
+              onChange={(e) => setEmail(e.target.value)}
+            />
+          </label>
+          <br />
+          {nome && senha && email && <button type="submit">cadastrar</button>}
+        </form>
+      </div>
+    );
+  }
 
-        <br />
-        {nome && senha && <button type="submit">cadastrar</button>}
-      </form>
-    </div>
-  );
-}
-
-export default App;
+  export default App;
